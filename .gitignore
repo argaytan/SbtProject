@@ -1,0 +1,10 @@
+/target/
+/project/project/
+/tmp/
+/checkpoint/
+project/build.properties
+/out/
+/*/target/
+/.idea/
+/*/*.iml
+/.bsp/
