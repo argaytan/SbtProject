@@ -1,4 +1,6 @@
-object Main {
+package org.arg.demos
+
+object Hello {
   def main(args: Array[String]): Unit = {
     println("Hello Polamalu..!")
     val ages = Seq(42, 75, 29, 64)

@@ -1,22 +1,21 @@
-package org.arg
+package org.arg.demos
 
-import org.apache.log4j.{Level, Logger}
-import org.apache.spark.SparkConf
+import com.arg.common.utilities.UtilFunctions
+import org.apache.log4j.Logger
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
-import org.apache.spark.sql.{DataFrame, Row, SparkSession}
+import org.apache.spark.sql.{Row, SparkSession}
 
-import java.util.Properties
-import scala.io.Source
-import scala.util.Try
+
 
 object SparkDemo {
   def main(args: Array[String]): Unit = {
-    val logger: Logger = Logger.getRootLogger
+    val utilFunctions: UtilFunctions = new UtilFunctions()
+    val logger: Logger = Logger.getRootLogger()
 
     logger.warn("Starting SparkDemo Application")
     val spark: SparkSession = SparkSession.builder()
       .appName("SparkDemo")
-      .config(getSparkConf)
+      .config(utilFunctions.getSparkConf)
       .getOrCreate()
 
     logger.warn("getting file lines...")
@@ -96,27 +95,9 @@ object SparkDemo {
 
 
 
-
     logger.warn("delay 10 secs...")
     Thread.sleep(10000)
   }
-
-  /**
-   * Retrieves the general spark configuration to be used in all the applications.
-   *
-   * @author Alberto Gaytan
-   * @return
-   */
-  def getSparkConf: SparkConf = {
-    val sparkAppConf = new SparkConf()
-    val props = new Properties()
-    if (Try(Source.fromFile("./conf/spark.conf")).isSuccess) {
-      props.load(Source.fromFile("./conf/spark.conf").bufferedReader())
-      props.forEach((k, v) => sparkAppConf.set(k.toString, v.toString))
-    }
-    sparkAppConf
-  }
-
 }
 
 

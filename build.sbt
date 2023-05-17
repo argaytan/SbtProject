@@ -5,6 +5,9 @@ ThisBuild / scalaVersion := "2.13.10"
 lazy val root = (project in file("."))
   .settings(
     name := "SbtProject",
-    libraryDependencies += "org.apache.spark" %% "spark-core" % "3.4.0",
-    libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.4.0"
+    libraryDependencies ++= List(
+      "org.apache.spark" %% "spark-core" % "3.4.0",
+      "org.apache.spark" %% "spark-sql" % "3.4.0",
+      "joda-time" % "joda-time" % "2.8.1"
+    )
   )
