@@ -36,9 +36,9 @@ object CsvToAzureSql {
     // Database Tables
     val schema = "common"
     val tableList = Map(
-      "hired_employees" -> "'employee_id', 'employee_name', 'date_hired', 'department_id', 'job_id'",
-      "jobs" -> "'job_id', 'job_name'",
-      "departments" -> "'department_id', 'name'"
+      "hired_employees" -> "'id', 'name', 'datetime', 'department_id', 'job_id'",
+      "jobs" -> "'id', 'job'",
+      "departments" -> "'id', 'department'"
     )
 
     // Iterate over the table list to overwrite data in Azure SQL Database
