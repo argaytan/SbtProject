@@ -25,7 +25,7 @@ object CsvToAzureSql {
     val jdbcDriver = props.get("jdbcDriver").toString
     val jdbcUsername = props.get("jdbcUser").toString
     val jdbcPassword = props.get("jdbcPassword").toString
-    val jdbcUrl = s"jdbc:sqlserver://$jdbcHostname:1433;database=$jdbcDatabase;"
+    val jdbcUrl = s"jdbc:sqlserver://$jdbcHostname:1433;database=$jdbcDatabase;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
 
 
     val connectionProperties: Properties = new Properties()
@@ -75,7 +75,7 @@ object CsvToAzureSql {
   def getProperties: Properties = {
     val prop: Properties = new Properties()
     prop.put("jdbcHostname", sys.env.getOrElse("AZURE_SQL_URL", ""))
-    prop.put("jdbcDriver", sys.env.getOrElse("AZURE_SQL_DRIVER", ""))
+    prop.put("jdbcDriver", sys.env.getOrElse("AZURE_SQL_DRIVER", "")) // mssql-jdbc-12.2.0.jre8.jar or mssql-jdbc-12.2.0.jre11.jar
     prop.put("jdbcDatabase", sys.env.getOrElse("AZURE_SQL_DB", ""))
     prop.put("jdbcUser", sys.env.getOrElse("AZURE_SQL_USER", ""))
     prop.put("jdbcPassword", sys.env.getOrElse("AZURE_SQL_PASSWORD", ""))
